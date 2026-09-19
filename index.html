@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="乘法拔河比賽">
+  <meta name="theme-color" content="#0b7285">
+  <title>乘法拔河比賽</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230b7285'/%3E%3Cpath d='M9 34h46' stroke='%23f5d97b' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M32 20v28' stroke='%23ff6b6b' stroke-width='6'/%3E%3Ccircle cx='32' cy='20' r='7' fill='%23ff6b6b'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">×</span>
+        <div>
+          <p class="eyebrow">四年級・整數的乘</p>
+          <h1>乘法拔河比賽</h1>
+        </div>
+      </div>
+      <div class="round-tools">
+        <div class="timer" aria-label="剩餘時間">
+          <span class="timer-icon" aria-hidden="true">◷</span>
+          <span id="timer">01:00</span>
+        </div>
+        <button id="sound-toggle" class="icon-button" type="button" aria-label="關閉音效" aria-pressed="true">♪</button>
+        <button id="restart-button" class="text-button" type="button">重新開始</button>
+      </div>
+    </header>
+
+    <section class="score-strip" aria-label="比賽分數">
+      <div class="score team-one-score"><span>小寶隊</span><strong id="score-0">0</strong></div>
+      <div class="round-status" id="round-status" role="status" aria-live="polite">準備拔河！</div>
+      <div class="score team-two-score"><strong id="score-1">0</strong><span>小貝隊</span></div>
+    </section>
+
+    <section class="play-grid">
+      <article class="team-panel team-one" data-team="0">
+        <div class="team-heading">
+          <span class="team-dot"></span>
+          <div><p>TEAM 1</p><h2>小寶隊</h2></div>
+          <span class="attempt-badge" id="attempts-0">還有 3 次機會</span>
+        </div>
+        <div class="question-card">
+          <span class="question-type" id="type-0">2 位數 × 1 位數</span>
+          <p class="equation" id="question-0">24 × 3 = ?</p>
+          <label class="answer-wrap" for="answer-0">
+            <span class="sr-only">小寶隊答案</span>
+            <input id="answer-0" inputmode="numeric" autocomplete="off" maxlength="7" placeholder="答案" readonly>
+          </label>
+          <p class="feedback" id="feedback-0" aria-live="polite">答對就能把繩子拉過來！</p>
+        </div>
+        <div class="keypad" aria-label="小寶隊數字鍵盤"></div>
+      </article>
+
+      <section class="arena" aria-label="花芽隊拔河比賽">
+        <div class="sky-decor" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="arena-title"><span></span>即時戰況<span></span></div>
+        <div class="tug-zone" id="tug-zone">
+          <div class="ground-shadow"></div>
+          <div class="center-line"><span>中線</span></div>
+          <div class="tug-party" id="tug-party">
+            <div class="characters left-team" aria-label="小寶隊兩位選手">
+              <img id="player-0" class="walker" alt="小寶隊步行皮克敏">
+              <img id="player-1" class="rider" alt="小寶隊騎著歐慶的皮克敏，由歐慶拉繩">
+            </div>
+            <div class="rope" aria-hidden="true">
+              <span class="rope-knot knot-left"></span>
+              <span class="center-flag"><b>×</b></span>
+              <span class="rope-knot knot-right"></span>
+            </div>
+            <div class="characters right-team" aria-label="小貝隊兩位選手">
+              <img id="player-2" class="walker" alt="小貝隊步行皮克敏">
+              <img id="player-3" class="rider" alt="小貝隊騎著歐慶的皮克敏，由歐慶拉繩">
+            </div>
+          </div>
+        </div>
+        <div class="tug-meter" aria-hidden="true">
+          <span class="meter-blue"></span><i></i><span class="meter-red"></span>
+        </div>
+        <p class="arena-hint">每答對一題，就能把對手拉向自己！</p>
+      </section>
+
+      <article class="team-panel team-two" data-team="1">
+        <div class="team-heading">
+          <span class="team-dot"></span>
+          <div><p>TEAM 2</p><h2>小貝隊</h2></div>
+          <span class="attempt-badge" id="attempts-1">還有 3 次機會</span>
+        </div>
+        <div class="question-card">
+          <span class="question-type" id="type-1">3 位數 × 2 位數</span>
+          <p class="equation" id="question-1">135 × 24 = ?</p>
+          <label class="answer-wrap" for="answer-1">
+            <span class="sr-only">小貝隊答案</span>
+            <input id="answer-1" inputmode="numeric" autocomplete="off" maxlength="7" placeholder="答案" readonly>
+          </label>
+          <p class="feedback" id="feedback-1" aria-live="polite">答對就能把繩子拉過來！</p>
+        </div>
+        <div class="keypad" aria-label="小貝隊數字鍵盤"></div>
+      </article>
+    </section>
+
+    <footer class="rules">
+      <span><b>直接答對</b>＋2 分</span>
+      <span><b>先錯再答對</b>＋1 分</span>
+      <span><b>錯 3 次</b>換下一題、不加分</span>
+      <span><b>分差達 15 分</b>提前獲勝</span>
+    </footer>
+  </main>
+
+  <div class="modal-backdrop visible" id="start-modal" role="dialog" aria-modal="true" aria-labelledby="start-title">
+    <div class="modal-card start-card">
+      <div class="modal-sprout" aria-hidden="true">✿</div>
+      <p class="eyebrow">兩隊同時挑戰</p>
+      <h2 id="start-title">乘法拔河比賽</h2>
+      <p>請老師先設定單場時間，再讓兩隊使用自己的數字鍵盤作答。</p>
+      <label class="time-setting" for="round-minutes">
+        <span>單場比賽時間</span>
+        <span class="time-input-wrap"><input id="round-minutes" type="number" min="1" max="60" step="1" value="1" inputmode="numeric" aria-describedby="time-hint time-error"><b>分鐘</b></span>
+        <small id="time-hint">請輸入 1～60 的整數</small>
+        <small id="time-error" class="time-error" role="alert" aria-live="polite"></small>
+      </label>
+      <div class="mini-rules">
+        <span><b>＋2</b>直接答對</span><span><b>＋1</b>修正後答對</span><span><b>3 次</b>換題</span>
+      </div>
+      <button id="start-button" class="primary-button" type="button">開始比賽</button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-title">
+    <div class="modal-card result-card">
+      <div class="trophy" aria-hidden="true">★</div>
+      <p class="eyebrow">比賽結束</p>
+      <h2 id="result-title">小寶隊獲勝！</h2>
+      <p id="result-copy">精彩的乘法對決！</p>
+      <div class="final-score"><strong id="final-score-0">0</strong><span>：</span><strong id="final-score-1">0</strong></div>
+      <button id="play-again-button" class="primary-button" type="button">設定下一場</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
