@@ -203,7 +203,7 @@
     state.teams.forEach((team) => window.clearTimeout(team.feedbackTimer));
     setControlsDisabled(true);
     const winner = teamIndex === 0 ? '小寶隊' : '小貝隊';
-    $('#round-status').textContent = `${winner}領先 15 分，圓點到中線！`;
+    $('#round-status').textContent = `${winner}領先 15 分！`;
     window.clearTimeout(state.finishTimer);
     state.finishTimer = window.setTimeout(() => endRound('lead'), 850);
   }
@@ -343,7 +343,7 @@
     const copy = a === b
       ? '兩隊的乘法實力一樣厲害！'
       : reason === 'lead'
-        ? '率先拉開 15 分，圓點碰到中線，提前獲勝！'
+        ? '率先拉開 15 分，提前獲勝！'
         : '漂亮的合作，把勝利拉過來了！';
     $('#result-title').textContent = title;
     $('#result-copy').textContent = copy;
