@@ -1,0 +1,44 @@
+.champion-show {
+  position: fixed; inset: 0; margin: 0; box-sizing: border-box;
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  overflow: hidden; padding: 0; border: 0; color: white;
+  background: radial-gradient(ellipse at center, #70328a, #281348 54%, #100d31);
+}
+.champion-show[open] { display: grid; place-items: center; }
+.champion-show::backdrop { background: #100d31; }
+.champion-show .rays {
+  position: absolute; width: 170vmax; height: 170vmax; place-self: center;
+  background: repeating-conic-gradient(from 3deg, transparent 0 12deg, #ffc76926 13deg 20deg);
+  animation: champion-spin 36s linear infinite;
+}
+.champion-show .confetti { position: absolute; inset: 0; overflow: hidden; }
+.confetti i { position: absolute; top: -4vh; width: .7rem; height: 1.25rem; animation: champion-rain 3s linear infinite; }
+.champion-show .podium { position: relative; display: grid; justify-items: center; gap: 1.2vmin; text-align: center; width: 92%; animation: champion-rise .55s ease-out both; }
+.podium b { font-size: 9vmin; line-height: 1.1; }
+.podium h2 { color: #ffdd80; font-size: clamp(28px, 7vmin, 85px); margin: 0; letter-spacing: .18em; text-indent: .18em; }
+.champion-portrait { box-sizing: border-box; width: 29vmin; height: 29vmin; object-fit: contain; background: #fff8db; border: .8vmin solid #ffe399; border-radius: 50%; box-shadow: 0 0 6vmin #ffce568c; }
+.podium strong { font-size: clamp(24px, 8vmin, 110px); line-height: 1.15; overflow-wrap: anywhere; max-width: 100%; text-shadow: 0 .06em #591d6a; }
+@keyframes champion-spin { to { transform: rotate(360deg); } }
+@keyframes champion-rain { to { transform: translate(4vw,110vh) rotateX(480deg) rotateZ(260deg); } }
+@keyframes champion-rise { from { transform: scale(.55); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .champion-show .rays, .champion-show .podium { animation: none; }
+  .champion-show .confetti { display: none; }
+}
+
+.champion-pair { position: relative; display: grid; }
+.cheering-sprout {
+  position: absolute; bottom: 0; left: calc(100% + 5vmin);
+  width: 20vmin; height: 24vmin; object-fit: contain;
+  filter: drop-shadow(0 1vmin 1vmin #150b4280);
+  transform-origin: center bottom;
+  animation: sprout-cheer .48s ease-in-out infinite alternate;
+}
+@keyframes sprout-cheer {
+  0% { transform: rotate(-8deg) scale(1.05,.95); }
+  50% { transform: translateY(-3vmin) rotate(0) scale(.98,1.04); }
+  100% { transform: rotate(8deg) scale(1.05,.95); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cheering-sprout { animation: none; }
+}
