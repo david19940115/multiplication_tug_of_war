@@ -42,3 +42,5 @@
   font-size: clamp(16px, 3cqw, 24px);
   font-variant-numeric: tabular-nums;
 }
+
+:root[data-skip-startup] #startup-notice { display: none; }

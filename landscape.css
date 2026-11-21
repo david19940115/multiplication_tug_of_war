@@ -3,7 +3,6 @@
   --game-vh: 1vh;
 }
 html, body { height: 100%; }
-#play-viewport, #play-track { display: contents; }
 
 #play-area {
   position: relative;
@@ -19,64 +18,4 @@ html, body { height: 100%; }
 #play-area .modal-backdrop {
   overflow: auto;
   place-items: safe center;
-}
-
-@media (orientation: portrait) and (any-pointer: coarse) {
-  /* Small viewport units keep the rotated area steady when browser bars move. */
-  :root {
-    --game-vw: 1svh;
-    --game-vh: 1svw;
-    overflow: hidden;
-  }
-  #play-viewport {
-    position: fixed;
-    inset: 0 auto auto 0;
-    display: block;
-    width: 100svw;
-    height: 100svh;
-    overflow: auto hidden;
-    direction: rtl;
-    overscroll-behavior: contain;
-    scrollbar-width: none;
-  }
-  #play-viewport:has(#startup-notice) { overflow: hidden; }
-  #play-track {
-    position: relative;
-    display: block;
-    width: var(--rotated-track-width, 100svw);
-    height: 100%;
-    direction: ltr;
-    overflow: clip;
-  }
-  #play-area, .champion-show {
-    position: fixed;
-    inset: 0 auto auto 100svw;
-    width: 100svh;
-    height: 100svw;
-    transform: rotate(90deg);
-    transform-origin: top left;
-  }
-  /* Rotate the content, keeping its scrolling surface in the browser's own axes. */
-  #play-area {
-    position: absolute;
-    left: 100%;
-  }
-  #play-scroll {
-    height: auto;
-    min-height: 100%;
-    overflow: visible;
-    display: flow-root;
-  }
-  #play-area :is(.field-scenery, .modal-backdrop, #notice) {
-    translate: 0 var(--rotated-scroll, 0px);
-  }
-  .rename-dialog {
-    position: fixed;
-    inset: 50% auto auto 50%;
-    width: min(400px, 90svh);
-    max-width: none;
-    max-height: 90svw;
-    margin: 0;
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
 }

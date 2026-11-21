@@ -1,1 +1,19 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>拔河比賽賽程圖</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="champion.css"><link rel="stylesheet" href="field.css"><link rel="stylesheet" href="../landscape.css"><script src="../landscape.js"></script></head><body><div id="play-viewport"><div id="play-track"><div id="play-area"><div class="field-scenery" aria-hidden="true"><i></i><i></i></div><div id="play-scroll"><header><h1>拔河比賽賽程圖</h1><span>預賽 13 場 · 決賽 3 場</span><button id="reset">重新分配</button></header><main id="app"></main></div><div id="notice" role="status" aria-live="polite"></div></div></div></div><script src="engine.js"></script><script src="champion.js"></script><script src="app.js"></script></body></html>
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>拔河比賽賽程圖</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="champion.css"><link rel="stylesheet" href="field.css"><link rel="stylesheet" href="../landscape.css"><link rel="stylesheet" href="portrait.css"></head><body>
+<section class="schedule-access" aria-labelledby="schedule-access-title">
+  <form id="schedule-password-form">
+    <h1 id="schedule-access-title">拔河比賽賽程圖</h1>
+    <label for="schedule-password">請輸入密碼</label>
+    <input id="schedule-password" name="password" type="password" required autofocus autocapitalize="none" autocomplete="off" spellcheck="false" aria-describedby="schedule-password-error">
+    <p id="schedule-password-error" role="alert"></p>
+    <button type="submit" class="primary">進入賽程圖</button>
+  </form>
+</section>
+<div id="play-area" inert><div class="field-scenery" aria-hidden="true"><i></i><i></i></div><div id="play-scroll"><div class="bracket-toolbar"><header><h1>拔河比賽賽程圖</h1><span>預賽 13 場 · 決賽 3 場</span><button id="reset">重新分配</button></header>
+<nav class="bracket-tabs" aria-label="切換賽程組別" hidden>
+  <button type="button" data-section="A" aria-pressed="true">A 組</button>
+  <button type="button" data-section="B" aria-pressed="false">B 組</button>
+  <button type="button" data-section="C" aria-pressed="false">C 組</button>
+  <button type="button" data-section="D" aria-pressed="false">D 組</button>
+  <button type="button" data-section="final" aria-pressed="false">決賽</button>
+</nav>
+</div><main id="app"></main></div><div id="notice" role="status" aria-live="polite"></div></div><script src="engine.js"></script><script src="champion.js"></script><script src="app.js"></script></body></html>

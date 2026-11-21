@@ -12,3 +12,38 @@ button[aria-disabled="true"]{cursor:default}
 .vertex>span:not(.stat),.final-node button>span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis}.person span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.edge.done{overflow-wrap:anywhere}
 @media(prefers-reduced-motion:reduce){img[data-portrait].holding{animation:none;outline:2px solid #2961dc}}
 
+
+#play-area[inert] { visibility: hidden; }
+.schedule-access {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: safe center;
+  overflow: auto;
+  padding: 16px;
+  background: linear-gradient(#dff8fb, #f4fff6 63%, #d7eaa9 64%, #b8d77e);
+}
+#schedule-password-form {
+  width: min(100%, 370px);
+  display: grid;
+  gap: 10px;
+  padding: 24px;
+  border: 1px solid #d6e5ea;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(31,70,89,.12);
+}
+#schedule-access-title { margin-bottom: 8px; white-space: normal; }
+#schedule-password-form label { font-weight: 700; }
+#schedule-password {
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid #aebfd7;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+}
+#schedule-password[aria-invalid="true"] { border-color: #ae293b; }
+#schedule-password-error { min-height: 1.35em; margin: 0; color: #ae293b; font-size: .9rem; }
+#schedule-password-form button { min-height: 44px; font-weight: 700; }

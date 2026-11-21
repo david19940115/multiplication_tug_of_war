@@ -1,0 +1,82 @@
+.bracket-toolbar { display: contents; }
+.bracket-tabs { display: none; }
+
+@media (orientation: portrait) and (any-pointer: coarse) {
+  .bracket-toolbar {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    background: #f8fcff;
+  }
+  .bracket-toolbar header { padding: 8px 10px; gap: 6px 10px; }
+  .bracket-toolbar #reset { min-height: 40px; }
+  .bracket-tabs:not([hidden]) {
+    display: flex;
+    gap: 5px;
+    padding: 7px 9px;
+    border-bottom: 1px solid #dce7ef;
+  }
+  .bracket-tabs button {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    padding: 4px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .bracket-tabs button[aria-pressed="true"] {
+    background: #2961dc;
+    border-color: #2961dc;
+    color: #fff;
+  }
+
+  #app { width: min(100%, 640px); margin-inline: auto; padding: 10px; }
+  .choices button { flex: 1; padding: 12px 8px; font-size: 1.05rem; min-height: 54px; }
+  .groups { display: block; }
+  .group { display: none; padding: 10px 6px; }
+  [data-portrait-section="A"] .group[data-section="A"],
+  [data-portrait-section="B"] .group[data-section="B"],
+  [data-portrait-section="C"] .group[data-section="C"],
+  [data-portrait-section="D"] .group[data-section="D"] { display: block; }
+  #app[data-portrait-section="final"] .groups,
+  #app:not([data-portrait-section="final"]) .final-section { display: none; }
+
+  .pool {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: 0;
+    gap: 5px;
+    padding: 6px;
+  }
+  .pool:not(:has(button)) { display: block; }
+  .pool .person { width: 100%; min-width: 0; min-height: 48px; }
+  .pool .person img { width: 100%; height: 35px; }
+  .actions button { flex: 1; min-height: 44px; }
+  .shape { width: min(100%, 320px); }
+  .shape svg { width: 100%; }
+  .shape :is(.vertex, .edge) { left: var(--portrait-x) !important; }
+  .edge { min-height: 44px; min-width: 46px; }
+
+  .final-section { margin-top: 0; }
+  .final-sizer { overflow: visible; }
+  .final-board {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "a b" "c d" "s1 s2" "champion champion";
+    gap: 10px 8px;
+    padding: 6px 10px 10px;
+  }
+  .final-board svg { display: none; }
+  .final-node { position: static; transform: none; width: auto; min-width: 0; }
+  .final-node button { width: min(100%, 150px); min-height: 82px; padding: 5px; }
+  #node-A { grid-area: a; }
+  #node-B { grid-area: b; }
+  #node-C { grid-area: c; }
+  #node-D { grid-area: d; }
+  #node-S1 { grid-area: s1; }
+  #node-S2 { grid-area: s2; }
+  #node-F { grid-area: champion; }
+}

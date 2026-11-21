@@ -254,10 +254,10 @@
     if (!rope) return;
     const players = $$('.characters img');
     players.forEach((player) => player.style.setProperty('--hand-shift', '0px'));
-    const ropeRect = landscapeRect(rope);
+    const ropeRect = rope.getBoundingClientRect();
     const ropeY = ropeRect.top + ropeRect.height / 2;
     players.forEach((player) => {
-      const rect = landscapeRect(player);
+      const rect = player.getBoundingClientRect();
       const handRatio = Number(player.dataset.handRatio || .66);
       const handY = rect.top + rect.height * handRatio;
       player.style.setProperty('--hand-shift', `${Math.round(ropeY - handY)}px`);

@@ -1,0 +1,127 @@
+@media (orientation: portrait) and (any-pointer: coarse) {
+  html, body {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  #play-area { height: 100svh; }
+  #play-scroll { overflow: hidden; }
+
+  .game-shell {
+    height: 100%;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    gap: clamp(5px, 1.1svh, 10px);
+    padding: clamp(5px, 1.6vw, 12px);
+  }
+
+  .topbar { align-items: center; gap: 6px; }
+  .brand { min-width: 0; gap: 5px; }
+  .brand-mark {
+    width: clamp(27px, 7vw, 46px);
+    height: clamp(27px, 7vw, 46px);
+    flex: none;
+    border-radius: 9px;
+    font-size: clamp(1rem, 4vw, 1.6rem);
+  }
+  .topbar .eyebrow { display: none; }
+  .topbar h1 { font-size: clamp(.88rem, 3.8vw, 1.6rem); }
+  .round-tools { flex: none; gap: 4px; }
+  .timer { min-width: 0; padding: 5px 7px; gap: 3px; font-size: clamp(.78rem, 3.3vw, 1.1rem); }
+  .timer-icon { font-size: 1em; }
+  .icon-button { width: 32px; height: 32px; }
+  .text-button { display: inline-block; padding: 6px; border-radius: 9px; font-size: .7rem; }
+
+  .score-strip {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    border-radius: 10px;
+  }
+  .score { min-height: 31px; gap: 5px; font-size: clamp(.71rem, 3vw, 1rem); }
+  .score strong { font-size: clamp(1rem, 4vw, 1.5rem); }
+  .team-one-score, .team-two-score { clip-path: none; }
+  .round-status { grid-column: auto; order: 0; padding: 3px; font-size: .67rem; line-height: 1.2; }
+
+  .play-grid {
+    min-height: 0;
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(70px, .75fr) minmax(0, 1.25fr);
+    grid-template-areas: "arena arena" "blue red";
+    gap: clamp(5px, 1.2vw, 10px);
+  }
+  .team-one { grid-area: blue; }
+  .team-two { grid-area: red; }
+  .team-panel {
+    min-height: 0;
+    min-width: 0;
+    padding: clamp(4px, 1.4vw, 10px);
+    gap: clamp(4px, 1svh, 8px);
+    border-radius: 13px;
+  }
+  .team-heading { min-height: 0; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px; }
+  .team-dot { width: 5px; height: 17px; }
+  .team-heading p { display: none; }
+  .team-heading h2 { font-size: clamp(.78rem, 3.7vw, 1.3rem); }
+  .attempt-badge { padding: 3px 4px; font-size: clamp(.62rem, 2.5vw, .83rem); }
+
+  .question-card { flex: none; min-height: 0; padding: 4px; border-radius: 10px; }
+  .question-type { padding: 2px 4px; font-size: clamp(.61rem, 2.5vw, .79rem); }
+  .equation { margin: 3px 0; white-space: nowrap; font-size: clamp(.88rem, 4.15vw, 1.95rem); }
+  .answer-wrap input {
+    height: clamp(26px, 5svh, 46px);
+    padding: 2px 4px;
+    border-radius: 8px;
+    font-size: clamp(.95rem, 4.3vw, 1.45rem);
+  }
+  .feedback {
+    line-height: 1.2;
+    min-height: 2.4em;
+    margin: 3px 0 0;
+    font-size: clamp(.62rem, 2.5vw, .88rem);
+    display: grid;
+    align-content: center;
+  }
+  .keypad {
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+    gap: clamp(3px, 1vw, 8px);
+    padding-bottom: 2px;
+  }
+  .key { min-height: 0; padding: 0; font-size: clamp(.87rem, 3.6vw, 1.3rem); border-radius: 8px; }
+  .key:is(.clear, .remainder, .action) { font-size: clamp(.75rem, 3.2vw, 1.08rem); }
+
+  .arena {
+    grid-area: arena;
+    min-height: 0;
+    padding: 4px 5px 5px;
+    border-radius: 14px;
+  }
+  .arena-title { font-size: .65rem; }
+  .tug-zone { min-height: 0; container-type: size; }
+  .tug-party {
+    --rope-level: clamp(20px, 55cqh, 175px);
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr minmax(64px, .7fr) 1fr;
+  }
+  .characters { height: 100%; }
+  .characters :is(.walker, .rider) { max-height: 86%; }
+  .rope { height: clamp(5px, 4cqh, 10px); }
+  .rope-knot { width: 11px; height: 11px; border-width: 2px; }
+  .center-flag { width: clamp(22px, 16cqh, 43px); height: clamp(26px, 22cqh, 58px); }
+  .center-flag b { font-size: clamp(.78rem, 9cqh, 1.25rem); }
+  .center-line span { bottom: 0; padding: 1px 4px; transform: translateX(-50%); }
+  .tug-meter { flex: none; height: 5px; }
+  .arena-hint, .rules { display: none; }
+}
+
+@media (orientation: portrait) and (any-pointer: coarse) and (max-height: 530px) {
+  .play-grid { grid-template-rows: minmax(80px, .48fr) minmax(0, 1.52fr); }
+  .question-type { display: none; }
+  .modal-card { padding: 16px; }
+  .modal-sprout, .trophy { width: 40px; height: 40px; margin-bottom: 6px; font-size: 1.5rem; }
+  .modal-card > p:not(.eyebrow), .mini-rules, .time-setting { margin-bottom: 10px; }
+}
