@@ -22,6 +22,7 @@ portraitTabs.addEventListener("click", event => {
   if (busy || !tab) return;
   portraitSection = tab.dataset.section;
   updatePortraitTabs();
+  fitFinal();
   document.querySelector("#play-scroll").scrollTo({top: 0});
 });
 
@@ -42,7 +43,7 @@ const edit=state.screen==='setup';app.innerHTML=`${edit?`<p class="hint">拖曳�
 if(edit){document.querySelector('#shuffle').onclick=()=>{state.order=shuffle();save();render()};document.querySelector('#start').onclick=()=>{state.screen='board';save();render()};document.querySelectorAll('[data-person]').forEach(el=>{el.onclick=()=>{selected=Number(el.dataset.person);render()};el.ondragstart=e=>e.dataTransfer.setData('text/plain',el.dataset.person)});document.querySelectorAll('[data-slot]').forEach(el=>{el.onclick=()=>{if(selected)place(selected,Number(el.dataset.slot));else if(el.dataset.drag){selected=Number(el.dataset.drag);render()}};el.ondragstart=e=>e.dataTransfer.setData('text/plain',el.dataset.drag||'');el.ondragover=e=>{e.preventDefault();el.classList.add('over')};el.ondragleave=()=>el.classList.remove('over');el.ondrop=e=>{e.preventDefault();place(Number(e.dataTransfer.getData('text/plain')),Number(el.dataset.slot))}});return}
 document.querySelectorAll('[data-edge]').forEach(el=>el.onclick=()=>{active={group:el.dataset.edge,index:Number(el.dataset.index)};render()});document.querySelectorAll('[data-group]').forEach(el=>el.onclick=()=>{const g=Cup.groups.find(g=>g.name===el.dataset.group),s=Cup.summary(state,g),p=Number(el.dataset.player);if(busy)return;if(active?.group===g.name){const m=s.games[active.index];if(!m.players.includes(p))return;const changed=m.winner!==p;state.results[m.key]=p;active=null;if(changed){const updated=Cup.summary(state,g);setQualifier(g.name,updated.complete&&updated.leaders.length===1?updated.leaders[0]:undefined);}save();render();notify(changed&&m.winner?'已更正勝者':'已記錄勝者');return;}if(s.complete&&s.leaders.includes(p)){setQualifier(g.name,p);save();render();notify(`${g.name} 組：${playerName(p)}晉級決賽`);}});document.querySelectorAll('[data-final]').forEach(el=>el.onclick=()=>winFinal(el.dataset.final,Number(el.dataset.player),el));fitFinal();}
 const positions={A:[80,340],B:[260,340],C:[460,340],D:[640,340],S1:[170,190],S2:[550,190],F:[360,50]};
-function finalView(){const readyAll=Object.keys(state.qualifiers).length===4;const nodes=['A','B','C','D','S1','S2','F'].map(id=>{const p=state.qualifiers[id]||state.finals[id],game=id==='A'||id==='B'?'S1':id==='C'||id==='D'?'S2':id==='S1'||id==='S2'?'F':null,opponents=game?Cup.finalist(state,game):[],ready=readyAll&&game&&opponents.every(Boolean),won=game&&state.finals[game]===p&&p,finished=game&&state.finals[game],pos=positions[id];return `<div class="final-node ${id==='F'?'champ':''}" id="node-${id}" style="left:${pos[0]}px;top:${pos[1]}px"><button class="${ready?'ready':''} ${won?'won':finished?'lost':''}" ${ready&&!busy?`data-final="${game}" data-player="${p}"`:'aria-disabled="true"'} aria-label="${p?`${playerName(p)}`:'等待選手'}${game?'獲勝':''}">${p?`${img(p)}<span>${playerName(p)}${won?' ✓':''}</span>`:'<span class="placeholder">待定</span>'}</button><small>${id==='F'?'🏆 總冠軍':id.startsWith('S')?'準決賽勝者':`${id} 組第一`}</small></div>`}).join('');return `<section class="final-section"><h2>決賽</h2><p class="hint">${state.finals.F?`🏆 ${playerName(state.finals.F)}獲得冠軍！`:readyAll?'點大頭晉級；點另一位可更正勝者。':'四組第一就位後，進行 A 對 B、C 對 D。'}</p><div class="final-sizer"><div class="final-board"><svg aria-hidden="true"><path d="M80 340 V260 H260 V340 M170 260 V190 M460 340 V260 H640 V340 M550 260 V190 M170 190 V115 H550 V190 M360 115 V50" fill="none" stroke="#b6cbe9" stroke-width="3"/></svg>${nodes}</div></div></section>`}
+function finalView(){const readyAll=Object.keys(state.qualifiers).length===4;const nodes=['A','B','C','D','S1','S2','F'].map(id=>{const p=state.qualifiers[id]||state.finals[id],game=id==='A'||id==='B'?'S1':id==='C'||id==='D'?'S2':id==='S1'||id==='S2'?'F':null,opponents=game?Cup.finalist(state,game):[],ready=readyAll&&game&&opponents.every(Boolean),won=game&&state.finals[game]===p&&p,finished=game&&state.finals[game],pos=positions[id];return `<div class="final-node ${id==='F'?'champ':''}" id="node-${id}" style="left:${pos[0]}px;top:${pos[1]}px"><button class="${ready?'ready':''} ${won?'won':finished?'lost':''}" ${ready&&!busy?`data-final="${game}" data-player="${p}"`:'aria-disabled="true"'} aria-label="${p?`${playerName(p)}`:'等待選手'}${game?'獲勝':''}">${p?`${img(p)}<span>${playerName(p)}${won?' ✓':''}</span>`:'<span class="placeholder">待定</span>'}</button><small>${id==='F'?'🏆 總冠軍':id.startsWith('S')?'準決賽勝者':`${id} 組第一`}</small></div>`}).join('');return `<section class="final-section"><h2>決賽</h2><p class="hint">${state.finals.F?`🏆 ${playerName(state.finals.F)}獲得冠軍！`:readyAll?'點大頭晉級；點另一位可更正勝者。':'四組第一就位後，進行 A 對 B、C 對 D。'}</p><div class="final-sizer"><div class="final-board"><svg aria-hidden="true"><path d="M80 340 V260 H260 V340 M170 260 V190 M460 340 V260 H640 V340 M550 260 V190 M170 190 V115 H550 V190 M360 115 V50" fill="none" stroke="#b6cbe9" stroke-width="3"/></svg><svg class="portrait-final-lines" aria-hidden="true"><path class="pending-lines"/><path class="advance-lines"/></svg>${nodes}</div></div></section>`}
 function fitFinal(){
  const s=document.querySelector('.final-sizer');
  if(!s)return;
@@ -50,6 +51,7 @@ function fitFinal(){
   s.style.removeProperty("width");
   s.style.removeProperty("height");
   s.firstElementChild.style.removeProperty("transform");
+  drawPortraitFinalLines(s.firstElementChild);
   return;
  }
  const scale=Math.min(1,(document.querySelector('#play-scroll').clientWidth-32)/720);
@@ -57,9 +59,33 @@ function fitFinal(){
  s.style.height=400*scale+'px';
  s.firstElementChild.style.transform=`scale(${scale})`;
 }
+function drawPortraitFinalLines(board) {
+ const width = board.clientWidth, height = board.clientHeight;
+ if (!width || !height) return;
+ const origin = board.getBoundingClientRect();
+ const lines = board.querySelector(".portrait-final-lines");
+ const paths = {pending: [], advance: []};
+ for (const [from, to] of [["A","S1"],["B","S1"],["C","S2"],["D","S2"],["S1","F"],["S2","F"]]) {
+  const start = board.querySelector("#node-" + from).getBoundingClientRect();
+  const end = board.querySelector("#node-" + to + " button").getBoundingClientRect();
+  const x1 = start.left + start.width / 2 - origin.left;
+  const y1 = start.bottom - origin.top + 2;
+  const x2 = end.left + end.width / 2 - origin.left;
+  const y2 = end.top - origin.top - 2;
+  const mid = (y1 + y2) / 2;
+  const player = state.qualifiers[from] || state.finals[from];
+  const route = player && player === state.finals[to] ? "advance" : "pending";
+  paths[route].push(`M${x1} ${y1} V${mid} H${x2} V${y2}`);
+ }
+ lines.setAttribute("viewBox", `0 0 ${width} ${height}`);
+ for (const [name, path] of Object.entries(paths)) {
+  lines.querySelector("." + name + "-lines").setAttribute("d", path.join(" "));
+ }
+}
+
 window.addEventListener('resize',fitFinal);
 portraitSchedule.addEventListener("change",fitFinal);
-async function winFinal(game,p,el){if(busy||!Cup.finalist(state,game).includes(p))return;if(state.finals[game]===p){notify('這位選手已是本場勝者');return;}busy=true;document.querySelectorAll('button').forEach(b=>b.disabled=true);const start=el.querySelector('img').getBoundingClientRect(),target=document.querySelector(`#node-${game} button`).getBoundingClientRect(),fly=document.createElement('img');fly.src=source(p);fly.className='fly';document.querySelector('#play-area').append(fly);const board=document.querySelector('.final-board').getBoundingClientRect(),scale=board.width/720,joint=portraitSchedule.matches?(start.top+target.top)/2:board.top+(game==='F'?115:260)*scale-29;try{await fly.animate([{left:start.left+'px',top:start.top+'px'},{left:start.left+'px',top:joint+'px'},{left:(target.left+target.width/2-29)+'px',top:joint+'px'},{left:(target.left+target.width/2-29)+'px',top:(target.top+4)+'px'}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?30:900,fill:'forwards',easing:'ease-in-out'}).finished}catch{}fly.remove();
+async function winFinal(game,p,el){if(busy||!Cup.finalist(state,game).includes(p))return;if(state.finals[game]===p){notify('這位選手已是本場勝者');return;}busy=true;app.querySelectorAll('button').forEach(b=>b.disabled=true);const start=el.querySelector('img').getBoundingClientRect(),target=document.querySelector(`#node-${game} button`).getBoundingClientRect(),fly=document.createElement('img');fly.src=source(p);fly.className='fly';document.querySelector('#play-area').append(fly);const board=document.querySelector('.final-board').getBoundingClientRect(),scale=board.width/720,joint=portraitSchedule.matches?(start.top+target.top)/2:board.top+(game==='F'?115:260)*scale-29;try{await fly.animate([{left:start.left+'px',top:start.top+'px'},{left:start.left+'px',top:joint+'px'},{left:(target.left+target.width/2-29)+'px',top:joint+'px'},{left:(target.left+target.width/2-29)+'px',top:(target.top+4)+'px'}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?30:900,fill:'forwards',easing:'ease-in-out'}).finished}catch{}fly.remove();
   if(game!=='F') delete state.finals.F;
   state.finals[game]=p;
   save();

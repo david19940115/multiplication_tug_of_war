@@ -1,4 +1,4 @@
-@media (orientation: portrait) and (any-pointer: coarse) {
+@media (any-pointer: coarse) {
   html, body {
     min-width: 0;
     overflow: hidden;
@@ -124,4 +124,56 @@
   .modal-card { padding: 16px; }
   .modal-sprout, .trophy { width: 40px; height: 40px; margin-bottom: 6px; font-size: 1.5rem; }
   .modal-card > p:not(.eyebrow), .mini-rules, .time-setting { margin-bottom: 10px; }
+}
+
+@media (orientation: landscape) and (any-pointer: coarse) {
+  .game-shell { gap: clamp(4px, 1.1svh, 9px); padding: clamp(4px, 1.2svh, 9px); }
+  .topbar h1 { font-size: clamp(.95rem, 4.4svh, 1.5rem); }
+  .brand-mark { width: clamp(26px, 9svh, 44px); height: clamp(26px, 9svh, 44px); }
+  .timer { font-size: clamp(.82rem, 4svh, 1.1rem); }
+  .score { min-height: clamp(26px, 9svh, 40px); }
+  .play-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.24fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-areas: "blue arena red";
+  }
+  .team-panel { padding: clamp(4px, 1.3svh, 10px); gap: clamp(4px, 1.2svh, 8px); }
+  .team-heading h2 { font-size: clamp(.81rem, 3.8svh, 1.28rem); }
+  .attempt-badge { font-size: clamp(.62rem, 3svh, .85rem); }
+  .question-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2px 4px;
+  }
+  .question-type { display: none; }
+  .equation { text-align: center; font-size: clamp(.72rem, 1.8vw, 1.4rem); }
+  .answer-wrap { width: 100%; }
+  .answer-wrap input { height: clamp(25px, 8svh, 44px); font-size: clamp(.81rem, 4.1svh, 1.25rem); }
+  .feedback { grid-column: 1 / -1; min-height: 1.2em; margin: 0; font-size: clamp(.62rem, 2.8svh, .85rem); }
+  .keypad { gap: clamp(3px, 1svh, 8px); }
+  .key { font-size: clamp(.87rem, 4svh, 1.3rem); }
+  .key:is(.clear, .remainder, .action) { font-size: clamp(.7rem, 3.5svh, 1.05rem); }
+
+  /* The division keypad has one more action, so share its last row on short screens. */
+  .keypad:has(.remainder) { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 0; }
+  .keypad:has(.remainder) .key { grid-column: span 4; margin-inline: 2px; }
+  .keypad:has(.remainder) .key:nth-child(n+10) { grid-column: span 3; }
+
+  .tug-party { grid-template-columns: 1fr minmax(38px, .68fr) 1fr; }
+  .modal-card { padding: clamp(10px, 4svh, 24px); }
+  .modal-sprout, .trophy { width: 42px; height: 42px; margin-bottom: 5px; font-size: 1.6rem; }
+  .modal-card > p:not(.eyebrow), .mini-rules, .time-setting { margin-bottom: 9px; }
+}
+
+@media (orientation: landscape) and (any-pointer: coarse) and (max-height: 300px) {
+  .game-shell { gap: 4px; padding: 3px 4px; }
+  .icon-button { width: 27px; height: 27px; }
+  .score { min-height: 22px; }
+  .team-panel { gap: 3px; padding: 3px; }
+  .team-dot { height: 12px; }
+  .attempt-badge { padding: 2px 3px; }
+  .question-card { padding: 2px; gap: 1px 4px; }
+  .equation { margin: 1px 0; }
+  .answer-wrap input { height: 22px; }
+  .keypad { padding-bottom: 1px; }
 }
