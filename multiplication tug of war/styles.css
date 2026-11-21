@@ -17,7 +17,7 @@
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: calc(100 * var(--game-vh));
   color: var(--ink);
   font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
   background:
@@ -29,13 +29,13 @@ body {
 button, input { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 
-.game-shell { width: min(1600px, 100%); min-height: 100vh; margin: 0 auto; padding: 18px clamp(14px, 2vw, 30px) 16px; display: flex; flex-direction: column; gap: 14px; }
+.game-shell { width: min(1600px, 100%); min-height: calc(100 * var(--game-vh)); margin: 0 auto; padding: 18px clamp(14px, calc(2 * var(--game-vw)), 30px) 16px; display: flex; flex-direction: column; gap: 14px; }
 
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .brand { display: flex; align-items: center; gap: 13px; }
 .brand-mark { width: 52px; height: 52px; display: grid; place-items: center; color: #fff; background: var(--ink); border-radius: 17px 17px 17px 5px; box-shadow: 0 9px 18px rgba(23,50,77,.18); font: 900 2rem/1 Georgia, serif; }
 .eyebrow { margin: 0 0 2px; color: var(--blue-dark); font-weight: 900; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; }
-h1 { margin: 0; font-size: clamp(1.35rem, 2.1vw, 2rem); line-height: 1.15; letter-spacing: .03em; }
+h1 { margin: 0; font-size: clamp(1.35rem, calc(2.1 * var(--game-vw)), 2rem); line-height: 1.15; letter-spacing: .03em; }
 .round-tools { display: flex; align-items: center; gap: 9px; }
 .timer { min-width: 112px; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 15px; border: 2px solid #d6e5ea; border-radius: 999px; background: #fff; font-weight: 900; font-variant-numeric: tabular-nums; font-size: 1.15rem; box-shadow: 0 5px 16px rgba(36,75,91,.08); }
 .timer-icon { color: var(--red); font-size: 1.35rem; }
@@ -68,7 +68,7 @@ h1 { margin: 0; font-size: clamp(1.35rem, 2.1vw, 2rem); line-height: 1.15; lette
 .question-card { flex: 1; min-height: 225px; padding: 20px 14px 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 20px; background: linear-gradient(180deg, var(--team-soft), #fff); border: 2px solid color-mix(in srgb, var(--team) 18%, white); position: relative; overflow: hidden; }
 .question-card::after { content: "×"; position: absolute; right: -4px; top: -27px; color: color-mix(in srgb, var(--team) 10%, transparent); font: 900 8rem/1 Georgia,serif; transform: rotate(9deg); pointer-events: none; }
 .question-type { position: relative; z-index: 1; padding: 5px 10px; color: var(--team-dark); background: #fff; border-radius: 8px; font-size: .72rem; font-weight: 900; letter-spacing: .03em; box-shadow: 0 4px 14px rgba(31,70,89,.07); }
-.equation { position: relative; z-index: 1; margin: 13px 0 11px; font-size: clamp(1.7rem, 2.5vw, 2.35rem); line-height: 1.2; font-weight: 950; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.equation { position: relative; z-index: 1; margin: 13px 0 11px; font-size: clamp(1.7rem, calc(2.5 * var(--game-vw)), 2.35rem); line-height: 1.2; font-weight: 950; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
 .answer-wrap { position: relative; z-index: 1; width: min(215px, 100%); }
 .answer-wrap input { width: 100%; height: 50px; padding: 5px 14px; text-align: center; color: var(--ink); border: 2px solid color-mix(in srgb, var(--team) 50%, white); border-radius: 13px; outline: none; background: #fff; font-size: 1.35rem; font-weight: 900; font-variant-numeric: tabular-nums; caret-color: transparent; box-shadow: inset 0 2px 5px rgba(20,50,70,.05); }
 .answer-wrap input:focus { border-color: var(--team); box-shadow: 0 0 0 4px color-mix(in srgb, var(--team) 15%, transparent); }
@@ -126,7 +126,7 @@ h1 { margin: 0; font-size: clamp(1.35rem, 2.1vw, 2rem); line-height: 1.15; lette
 .modal-backdrop { position: fixed; inset: 0; z-index: 20; display: none; place-items: center; padding: 18px; background: rgba(11,36,56,.62); backdrop-filter: blur(8px); }
 .modal-backdrop.visible { display: grid; animation: fade-in .2s ease; }
 .modal-card { width: min(470px, 100%); padding: 34px; text-align: center; border-radius: 28px; background: #fff; box-shadow: 0 28px 80px rgba(5,30,49,.3); }
-.modal-card h2 { margin: 5px 0 10px; font-size: clamp(1.65rem, 4vw, 2.25rem); }.modal-card > p:not(.eyebrow) { margin: 0 auto 22px; max-width: 35ch; color: var(--muted); line-height: 1.7; }
+.modal-card h2 { margin: 5px 0 10px; font-size: clamp(1.65rem, calc(4 * var(--game-vw)), 2.25rem); }.modal-card > p:not(.eyebrow) { margin: 0 auto 22px; max-width: 35ch; color: var(--muted); line-height: 1.7; }
 .modal-sprout, .trophy { width: 76px; height: 76px; margin: -5px auto 12px; display: grid; place-items: center; border-radius: 24px 24px 24px 7px; color: #fff; background: linear-gradient(145deg, #24b9c9, #7ac66b); font-size: 2.3rem; transform: rotate(-4deg); box-shadow: 0 12px 24px rgba(30,145,148,.2); }
 .trophy { color: #fff5bf; background: linear-gradient(145deg,#ffad43,#f05f5f); }
 .mini-rules { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin: 0 0 23px; }.mini-rules span { padding: 11px 5px; border-radius: 13px; color: var(--muted); background: #f3f8f8; font-size: .72rem; font-weight: 800; }.mini-rules b { display: block; color: var(--blue-dark); font-size: 1.1rem; }
@@ -145,16 +145,15 @@ h1 { margin: 0; font-size: clamp(1.35rem, 2.1vw, 2rem); line-height: 1.15; lette
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes timer-pulse { to { transform: scale(1.04); background: #fff4f2; } }
 
-@media (max-width: 1050px) {
+@container play-area (max-width: 1050px) {
   .play-grid { grid-template-columns: 1fr 1fr; min-height: auto; }
   .arena { grid-column: 1 / -1; grid-row: 1; min-height: 460px; }
   .team-panel { min-height: 540px; }
   .tug-party { max-width: 820px; }
 }
 
-@media (min-width: 1051px) and (max-height: 950px) {
-  body { overflow: hidden; }
-  .game-shell { width: min(1720px, 100%); height: 100svh; min-height: 0; padding: 7px 16px 6px; gap: 7px; overflow: hidden; }
+@container play-area (min-width: 1051px) and (max-height: 950px) {
+  .game-shell { width: min(1720px, 100%); height: calc(100 * var(--game-vh)); min-height: 0; padding: 7px 16px 6px; gap: 7px; overflow: hidden; }
   .topbar { min-height: 42px; }
   .brand { gap: 9px; }
   .brand-mark { width: 40px; height: 40px; border-radius: 13px 13px 13px 4px; font-size: 1.5rem; }
@@ -173,21 +172,21 @@ h1 { margin: 0; font-size: clamp(1.35rem, 2.1vw, 2rem); line-height: 1.15; lette
   .attempt-badge { padding: 5px 7px; }
   .question-card { min-height: 0; padding: 9px 8px 6px; border-radius: 16px; }
   .question-type { padding: 4px 8px; font-size: .66rem; }
-  .equation { margin: 7px 0 6px; font-size: clamp(1.45rem, 2vw, 1.9rem); }
+  .equation { margin: 7px 0 6px; font-size: clamp(1.45rem, calc(2 * var(--game-vw)), 1.9rem); }
   .answer-wrap input { height: 40px; font-size: 1.15rem; }
   .feedback { min-height: 17px; margin-top: 4px; font-size: .7rem; }
   .keypad { gap: 5px; }
   .key { min-height: 32px; border-radius: 9px; font-size: .95rem; }
   .arena { min-height: 0; padding: 9px 8px 6px; border-radius: 19px; }
   .tug-zone { min-height: 0; }
-  .tug-party { --rope-level: clamp(122px, 20vh, 150px); height: clamp(245px, 41vh, 310px); }
+  .tug-party { --rope-level: clamp(122px, calc(20 * var(--game-vh)), 150px); height: clamp(245px, calc(41 * var(--game-vh)), 310px); }
   .characters { height: 100%; }
-  .characters .walker, .characters .rider { max-height: min(235px, 34vh); }
+  .characters .walker, .characters .rider { max-height: min(235px, calc(34 * var(--game-vh))); }
   .arena-hint { margin-top: 5px; }
   .rules { min-height: 19px; gap: 4px 15px; font-size: .7rem; }
 }
 
-@media (max-width: 680px) {
+@container play-area (max-width: 680px) {
   .game-shell { padding: 12px 10px; }
   .topbar { align-items: flex-start; }.brand-mark { width: 44px; height: 44px; border-radius: 14px 14px 14px 5px; }.eyebrow { font-size: .65rem; } h1 { font-size: 1.2rem; }
   .round-tools { gap: 5px; }.timer { min-width: 88px; padding: 8px 10px; font-size: 1rem; }.icon-button { width: 39px; height: 39px; }.text-button { display: none; }

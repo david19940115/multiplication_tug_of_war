@@ -12,14 +12,14 @@
   animation: champion-spin 36s linear infinite;
 }
 .champion-show .confetti { position: absolute; inset: 0; overflow: hidden; }
-.confetti i { position: absolute; top: -4vh; width: .7rem; height: 1.25rem; animation: champion-rain 3s linear infinite; }
+.confetti i { position: absolute; top: calc(-4 * var(--game-vh)); width: .7rem; height: 1.25rem; animation: champion-rain 3s linear infinite; }
 .champion-show .podium { position: relative; display: grid; justify-items: center; gap: 1.2vmin; text-align: center; width: 92%; animation: champion-rise .55s ease-out both; }
 .podium b { font-size: 9vmin; line-height: 1.1; }
 .podium h2 { color: #ffdd80; font-size: clamp(28px, 7vmin, 85px); margin: 0; letter-spacing: .18em; text-indent: .18em; }
 .champion-portrait { box-sizing: border-box; width: 29vmin; height: 29vmin; object-fit: contain; background: #fff8db; border: .8vmin solid #ffe399; border-radius: 50%; box-shadow: 0 0 6vmin #ffce568c; }
 .podium strong { font-size: clamp(24px, 8vmin, 110px); line-height: 1.15; overflow-wrap: anywhere; max-width: 100%; text-shadow: 0 .06em #591d6a; }
 @keyframes champion-spin { to { transform: rotate(360deg); } }
-@keyframes champion-rain { to { transform: translate(4vw,110vh) rotateX(480deg) rotateZ(260deg); } }
+@keyframes champion-rain { to { transform: translate(calc(4 * var(--game-vw)),calc(110 * var(--game-vh))) rotateX(480deg) rotateZ(260deg); } }
 @keyframes champion-rise { from { transform: scale(.55); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   .champion-show .rays, .champion-show .podium { animation: none; }

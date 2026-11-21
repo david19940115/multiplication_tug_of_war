@@ -1,5 +1,5 @@
 body {
-  min-height: 100vh;
+  min-height: calc(100 * var(--game-vh));
   isolation: isolate;
   background: #e6f8f7;
 }
@@ -37,7 +37,7 @@ header { background: #ffffffb8; }
   border-radius: 16px;
   box-shadow: 0 6px 22px rgba(31,70,89,.09);
 }
-.home { padding: clamp(20px, 4vw, 48px); }
+.home { padding: clamp(20px, calc(4 * var(--game-vw)), 48px); }
 .home h2 { margin-top: 0; }
 .final-section { padding-bottom: 12px; }
 .final-section > h2, .final-section > .hint { margin-inline: 12px; }

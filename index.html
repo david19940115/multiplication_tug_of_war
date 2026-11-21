@@ -6,8 +6,10 @@
   <title>數學拔河・遊戲大廳</title>
   <link rel="stylesheet" href="multiplication tug of war/styles.css">
   <link rel="stylesheet" href="lobby.css">
-</head>
+<link rel="stylesheet" href="landscape.css"><script src="landscape.js"></script><script src="startup.js" defer></script></head>
 <body>
+<div id="play-area">
+<div id="play-scroll" inert>
   <main class="lobby">
     <header class="brand">
       <span class="brand-mark" aria-hidden="true">×</span>
@@ -25,5 +27,13 @@
       <a class="schedule" href="bracket/index.html" target="_blank" rel="noopener"><strong>賽程圖</strong><small>在新分頁開啟 ↗</small></a>
     </nav>
   </main>
+</div>
+<section id="startup-notice" role="dialog" aria-modal="true" aria-labelledby="startup-title" tabindex="-1">
+  <div>
+    <h1 id="startup-title">建議將平板、手機橫擺</h1>
+    <p id="startup-countdown" aria-hidden="true">5</p>
+  </div>
+</section>
+</div>
 </body>
 </html>
